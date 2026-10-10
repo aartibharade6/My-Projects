@@ -1,0 +1,257 @@
+
+/* 1. CSS Variables */
+:root {
+    --bg: #f3f6fc;
+    --card: #ffffff;
+    --text: #202b3c;
+    --muted: #536176;
+    --primary: #2457d6;
+    --border: #dce3ef;
+    --shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+}
+
+html[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #111827;
+    --card: #1f2937;
+    --text: #f9fafb;
+    --muted: #cbd5e1;
+    --primary: #9bbcff;
+    --border: #374151;
+    --shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    line-height: 1.7;
+    background: var(--bg);
+    color: var(--text);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+a {
+    color: var(--primary);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 3px;
+}
+
+/* 2. Skip Link */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 10px;
+    z-index: 10;
+    padding: 10px;
+    background: var(--card);
+    color: var(--text);
+}
+
+.skip-link:focus {
+    top: 10px;
+}
+
+/* 3. Header and Flexbox */
+header {
+    padding: 20px;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+}
+
+header h1 {
+    margin-top: 0;
+}
+
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 12px 24px;
+    padding: 0;
+    margin: 15px 0;
+    list-style: none;
+}
+
+nav a {
+    color: var(--text);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+nav a:hover,
+nav a[aria-current="page"] {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
+
+/* 4. Theme Button */
+.theme-toggle {
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--card);
+    color: var(--text);
+    cursor: pointer;
+    font: inherit;
+}
+
+/* 5. Main Layout */
+main {
+    width: min(1100px, 92%);
+    min-height: 65vh;
+    margin: 30px auto;
+}
+
+section {
+    margin-bottom: 25px;
+    padding: 24px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+}
+
+section h2 {
+    color: var(--primary);
+}
+
+/* 6. Grid Layout */
+#main {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+    align-content: start;
+}
+
+#main > section {
+    margin: 0;
+    min-width: 0;
+}
+
+/* 7. Contact Form */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+    font: inherit;
+}
+
+textarea {
+    resize: vertical;
+}
+
+button[type="submit"] {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 8px;
+    background: var(--primary);
+    color: white;
+    font: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+html[data-theme="dark"] button[type="submit"] {
+    color: #111827;
+}
+
+/* 8. Footer */
+footer {
+    padding: 22px;
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    text-align: center;
+}
+
+/* 9. Tablet */
+@media (min-width: 600px) {
+    header {
+        padding: 24px;
+    }
+
+    #main {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #main > section:first-child {
+        grid-column: 1 / -1;
+    }
+}
+
+/* 10. Desktop */
+@media (min-width: 900px) {
+    header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-around;
+        gap: 15px;
+    }
+
+    header h1 {
+        margin: 0;
+    }
+
+    nav ul {
+        margin: 0;
+    }
+
+    #main {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #main > section:first-child {
+        grid-column: 1 / -1;
+    }
+}
+
+/* 11. Reduced Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
